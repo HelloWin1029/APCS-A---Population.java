@@ -2,7 +2,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- *	Population - <description goes here>
+ *	Population - A project that includes a database from the list of USA cities and
+ * 				 sorting methods by city population and city name, using
+ * 				 Selection Sort, Insertion Sort, and Merge Sort.
  *
  *	Requires FileUtils and Prompt classes.
  *
@@ -33,7 +35,11 @@ public class Population {
 	    java.util.Scanner input = null;
 	    input = FileUtils.openToRead(DATA_FILE);
 	    
-	    // read in input
+	    String a = "Balance of Stites";
+	    String b = "Balance of Niles";
+	    System.out.println(a.compareTo(b));
+	    
+	    // Create a database of cities
 	    while(input.hasNext()){
 	        String[] info = input.nextLine().split("[\t\n]");
 	        String state = info[0], name = info[1], designation = info[2];
@@ -43,6 +49,7 @@ public class Population {
 	    }
 	    System.out.println(cities.size() + " cities in database\n");
 	    
+	    // Handle queries
 	    String enter = "";
 	    do{
 			printMenu();
@@ -71,6 +78,7 @@ public class Population {
 	        sort.selectionSort(copy);
 	        long endMillisec = System.currentTimeMillis();
 			
+			// Output
 			String state = "States", city = "City", type = "Type", population = "Population";
 			System.out.printf("     %-22s %-22s %-12s %12s\n", state, city, type, population);
 	        for (int i = 0; i < 50; i++){
@@ -89,6 +97,7 @@ public class Population {
 	        sort.mergeSort(copy, 0, copy.size() - 1, 1);
 	        long endMillisec = System.currentTimeMillis();
 	        
+	        // Output
 	        String state = "States", city = "City", type = "Type", population = "Population";
 			System.out.printf("     %-22s %-22s %-12s %12s\n", state, city, type, population);
 	        for (int i = 0; i < 50; i++){
@@ -107,6 +116,7 @@ public class Population {
 	        sort.insertionSort(copy);
 	        long endMillisec = System.currentTimeMillis();
 	        
+	        // Output
 	        String state = "States", city = "City", type = "Type", population = "Population";
 			System.out.printf("     %-22s %-22s %-12s %12s\n", state, city, type, population);
 	        for (int i = 0; i < 50; i++){
@@ -125,6 +135,7 @@ public class Population {
 	        sort.mergeSort(copy, 0, copy.size() - 1, 2);
 	        long endMillisec = System.currentTimeMillis();
 	        
+	        // Output
 	        String state = "States", city = "City", type = "Type", population = "Population";
 			System.out.printf("     %-22s %-22s %-12s %12s\n", state, city, type, population);
 	        for (int i = copy.size() - 1; i >= copy.size() - 50; i--){
@@ -138,6 +149,7 @@ public class Population {
 	    else if (x == 5){ // merge sort
 	        boolean found = false;
 	        String state = "";
+	        // Ask for state name and check if valid
 	        do{
 	            state = Prompt.getString("Enter state name (ie. Alabama)");
 	            for (int i = 0; i < cities.size() && !found; i++){
@@ -155,6 +167,7 @@ public class Population {
 			}
 	        sort.mergeSort(copy, 0, copy.size() - 1, 1);
 	        
+	        // Output
 	        System.out.println("\nFifty most populous cities in " + state);
 	        String statePrint = "States", city = "City", type = "Type", population = "Population";
 			System.out.printf("     %-22s %-22s %-12s %12s\n", statePrint, city, type, population);
@@ -168,6 +181,7 @@ public class Population {
 	    else{ // merge sort
 	        boolean found = false;
 	        String name = "";
+	        // Ask for city name and check if valid
 	        do{
 	            name = Prompt.getString("Enter city name");
 	            for (int i = 0; i < cities.size() && !found; i++){
@@ -179,12 +193,13 @@ public class Population {
 	        } while(!found);
 	        
 	        List<City> copy = new ArrayList<City>();
-	        for (int i  = 0; i < cities.size(); i++){
+	        for (int i = 0; i < cities.size(); i++){
 				if (cities.get(i).getName().equalsIgnoreCase(name))
 					copy.add(cities.get(i));
 			}
 	        sort.mergeSort(copy, 0, copy.size() - 1, 1);
 	        
+	        // Output
 	        System.out.println("\nCity " + name + " by population");
 	        String statePrint = "States", city = "City", type = "Type", population = "Population";
 			System.out.printf("     %-22s %-22s %-12s %12s\n", statePrint, city, type, population);
